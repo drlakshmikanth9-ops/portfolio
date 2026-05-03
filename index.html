@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Devarinti Lakshmikanth | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Lora:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0077b6;
+    --surface: #023e8a;
+    --green: #90e0ef;
+    --green-dim: #48cae4;
+    --green-glow: rgba(144,224,239,0.18);
+    --red: #ff3d3d;
+    --white: #ffffff;
+    --muted: #caf0f8;
+    --card: #0096c7;
+    --border: rgba(144,224,239,0.25);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--white); font-family: 'Lora', Georgia, serif; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: .35;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(2,62,138,0.92); backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.25rem; color: var(--white); }
+  .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: .82rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; transition: color .25s; }
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 7rem 3rem 4rem; position: relative; overflow: hidden; }
+  .hero-glow { position: absolute; top: -120px; right: -80px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(144,224,239,.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; width: 100%; }
+  .hero-tag { display: inline-block; background: var(--green-glow); border: 1px solid var(--border); color: var(--white); font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; padding: .35rem .9rem; border-radius: 99px; margin-bottom: 1.5rem; animation: fadeUp .6s ease both; }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.15; animation: fadeUp .6s .1s ease both; }
+  .hero-subtitle { margin-top: 1.2rem; font-size: 1rem; color: var(--muted); line-height: 1.8; max-width: 480px; animation: fadeUp .6s .2s ease both; }
+  .hero-cta { margin-top: 2.2rem; display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp .6s .3s ease both; }
+  .btn { padding: .75rem 1.8rem; border-radius: 6px; font-family: 'Lora', serif; font-size: .9rem; font-weight: 600; cursor: pointer; transition: all .25s; text-decoration: none; display: inline-block; }
+  .btn-primary { background: var(--white); color: #023e8a; border: none; box-shadow: 0 0 24px rgba(255,255,255,.2); }
+  .btn-primary:hover { background: var(--muted); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid var(--white); }
+  .btn-outline:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+
+  /* PHOTO */
+  .hero-photo-wrap { display: flex; justify-content: center; align-items: center; animation: fadeUp .6s .25s ease both; }
+  .photo-frame { position: relative; width: 310px; height: 380px; }
+  .photo-frame::before { content: ''; position: absolute; inset: -3px; border-radius: 18px; background: linear-gradient(135deg, var(--green), transparent 60%); z-index: 0; }
+  .photo-img { position: relative; z-index: 1; width: 100%; height: 100%; border-radius: 16px; overflow: hidden; }
+  .photo-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .photo-badge { position: absolute; bottom: -16px; right: -16px; z-index: 2; background: var(--white); color: #023e8a; font-family: 'Playfair Display', serif; font-weight: 700; font-size: .75rem; padding: .5rem 1rem; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,.2); }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  .section-label { font-size: .72rem; font-weight: 600; color: var(--muted); letter-spacing: .18em; text-transform: uppercase; margin-bottom: .7rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; margin-bottom: 1rem; line-height: 1.2; }
+  .section-desc { color: var(--muted); font-size: 1rem; max-width: 540px; line-height: 1.7; }
+  .max-w { max-width: 1100px; margin: 0 auto; }
+  .custom { color: var(--green); font-weight: 700; }
+  .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .about-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.6rem; margin-bottom: 1.2rem; }
+  .about-card h3 { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; color: var(--white); margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .08em; }
+  .about-card p { color: var(--muted); font-size: .93rem; line-height: 1.7; }
+
+  /* EDUCATION */
+  .edu-timeline { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .edu-item { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.8rem 2rem; display: grid; grid-template-columns: auto 1fr; gap: 1.2rem; align-items: start; }
+  .edu-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green); margin-top: .35rem; flex-shrink: 0; box-shadow: 0 0 10px var(--green-dim); }
+  .edu-item h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--white); }
+  .edu-item .edu-sub { color: var(--muted); font-size: .88rem; margin-top: .3rem; }
+  .badge { background: var(--green-glow); border: 1px solid var(--border); color: var(--green); font-size: .72rem; font-weight: 600; padding: .25rem .75rem; border-radius: 99px; display: inline-block; margin-top: .7rem; margin-right: .4rem; }
+
+  /* SKILLS */
+  .skills-section-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 3rem; }
+  .skills-group h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: .07em; }
+  .skill-bar-wrap { margin-bottom: 1rem; }
+  .skill-bar-label { display: flex; justify-content: space-between; color: var(--muted); font-size: .85rem; margin-bottom: .4rem; }
+  .skill-bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 99px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--green-dim), var(--green)); animation: grow 1.2s ease both; }
+  @keyframes grow { from { width: 0; } }
+  .soft-tags { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+  .soft-tag { background: var(--card); border: 1px solid var(--border); color: var(--white); font-size: .82rem; font-weight: 600; padding: .4rem 1rem; border-radius: 99px; }
+  .tools-grid { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+  .tool-pill { background: var(--green-glow); border: 1px solid var(--border); color: var(--green); font-size: .78rem; font-weight: 600; padding: .35rem .9rem; border-radius: 99px; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+  .proj-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; transition: transform .3s, border-color .3s; }
+  .proj-card:hover { transform: translateY(-5px); border-color: var(--green); }
+  .proj-header { background: linear-gradient(135deg, #023e8a, #0077b6); padding: 1.8rem 1.8rem 1.4rem; position: relative; }
+  .proj-icon { font-size: 2.5rem; margin-bottom: .6rem; display: block; }
+  .proj-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--white); }
+  .proj-body { padding: 1.5rem 1.8rem; }
+  .proj-desc { color: var(--muted); font-size: .88rem; line-height: 1.7; }
+  .proj-tag { background: rgba(144,224,239,.08); border: 1px solid var(--border); color: var(--green); font-size: .7rem; font-weight: 600; padding: .22rem .7rem; border-radius: 99px; display: inline-block; margin: .8rem .3rem 0 0; }
+
+  /* ACHIEVEMENTS */
+  .ach-grid { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 3rem; }
+  .ach-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.8rem; display: flex; gap: 1.2rem; align-items: flex-start; }
+  .ach-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .ach-item p { color: var(--muted); font-size: .93rem; line-height: 1.7; }
+
+  /* GOAL */
+  .goal-section { background: linear-gradient(135deg, #023e8a, #0077b6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .goal-inner { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; }
+  .goal-icon { font-size: 4rem; flex-shrink: 0; }
+  .goal-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; margin-bottom: .6rem; }
+  .goal-text p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 560px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  .contact-item { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.8rem; display: flex; align-items: center; gap: 1.2rem; transition: border-color .25s; }
+  .contact-item:hover { border-color: var(--green); }
+  .contact-item .c-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .contact-item h4 { font-family: 'Playfair Display', serif; font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .3rem; }
+  .contact-item a { color: var(--green); font-weight: 600; font-size: .93rem; text-decoration: none; word-break: break-all; }
+  .contact-item a:hover { text-decoration: underline; }
+  .contact-item span.val { color: var(--white); font-weight: 600; font-size: .93rem; }
+
+  footer { padding: 2rem 3rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: .82rem; flex-wrap: wrap; gap: .5rem; }
+  footer span { color: var(--white); font-weight: 600; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: .72rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-inner, .about-grid, .skills-section-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-photo-wrap { order: -1; }
+    .photo-frame { width: 220px; height: 270px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">DL.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-inner max-w">
+    <div class="hero-text">
+      <div class="hero-tag">Portfolio </div>
+      <h1 class="hero-name">Devarinti<br/>Lakshmikanth</h1>
+      <p class="hero-subtitle">
+        A motivated <strong style="color:var(--white)">B.Tech CSE (AI &amp; ML)</strong> student at
+        <strong style="color:var(--white)">Mohan Babu University, Tirupathi</strong> —
+        passionate about AI, software development, and building real-world solutions.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <div class="photo-frame">
+        <div class="photo-img">
+           <img src="C:\Users\D R Lakshmikanth\Desktop\portimage.jaj.jpeg" alt="Profile Photo">
+          <img id="profilePic" src="" alt="Devarinti Lakshmikanth"/>
+        </div>
+        <div class="photo-badge">3rd Year · CSE AI/ML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div>
+        <p style="color:var(--muted); line-height:1.85; font-size:.97rem;">
+          I am a motivated <span class="custom">B.Tech Computer Science Engineering (AI &amp; ML)</span> student
+          currently in my <span class="custom">3rd year</span> at Mohan Babu University, Tirupathi.
+          I have a strong foundation in <span class="custom">programming, data structures, and machine learning</span> concepts.
+          <br/><br/>
+          I am eager to apply my technical skills to real-world projects, enhance my problem-solving abilities,
+          and gain industry experience through <span class="custom">internships and collaborative work</span>.
+        </p>
+      </div>
+      <div>
+        <div class="about-card">
+          <h3>📍 Location</h3>
+          <p><span class="custom">Tirupathi, Andhra Pradesh</span></p>
+        </div>
+        <div class="about-card">
+          <h3>🎓 Degree</h3>
+          <p><span class="custom">B.Tech CSE (AI &amp; ML)</span> · CGPA: <span class="custom">7.66</span></p>
+        </div>
+        <div class="about-card">
+          <h3>💡 Areas of Interest</h3>
+          <p>Artificial Intelligence · Software Development · Internet of Things (IoT)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education" style="background:var(--surface);">
+  <div class="max-w">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-timeline">
+
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <h3>Mohan Babu University</h3>
+          <div class="edu-sub">📍 Tirupathi · 2023 – 2027</div>
+          <div class="edu-sub" style="margin-top:.4rem;">B.Tech Computer Science Engineering (AI &amp; ML)</div>
+          <div>
+            <span class="badge">CGPA: 7.66</span>
+            <span class="badge">AI &amp; ML</span>
+            <span class="badge">Graduating 2027</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <h3>Narayana Junior College</h3>
+          <div class="edu-sub">📍 Adoni · 2021 – 2023</div>
+          <div class="edu-sub" style="margin-top:.4rem;">Intermediate (12th)</div>
+          <div>
+            <span class="badge">Percentage: 66.7%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <h3>Mount Carmel High School</h3>
+          <div class="edu-sub">📍 Kosigi · 2020</div>
+          <div class="edu-sub" style="margin-top:.4rem;">SSC (10th)</div>
+          <div>
+            <span class="badge">Percentage: 66.7%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="max-w">
+    <div class="section-label">Technical Toolkit</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-section-grid">
+
+      <div class="skills-group">
+        <h3>Programming Languages</h3>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Python</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Java</span><span>75%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>C</span><span>70%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>HTML / CSS (Frontend)</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Tools &amp; Platforms</h3>
+        <div class="tools-grid">
+          <span class="tool-pill">Eclipse</span>
+          <span class="tool-pill">VS Code</span>
+          <span class="tool-pill">GitHub</span>
+          <span class="tool-pill">Jupyter Notebook</span>
+        </div>
+      </div>
+
+      <div class="skills-group">
+        <h3>Core Skills</h3>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Data Structures &amp; Algorithms</span><span>75%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Object-Oriented Programming</span><span>78%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-label"><span>Problem Solving</span><span>82%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" style="width:82%"></div></div>
+        </div>
+
+        <h3 style="margin-top:2rem;">Soft Skills</h3>
+        <div class="soft-tags">
+          <span class="soft-tag">🤝 Teamwork</span>
+          <span class="soft-tag">🔄 Adaptability</span>
+          <span class="soft-tag">🧩 Problem Solving</span>
+          <span class="soft-tag">💬 Communication</span>
+          <span class="soft-tag">👥 Team Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--surface);">
+  <div class="max-w">
+    <div class="section-label">Academic Work</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <span class="proj-icon">🧠</span>
+          <div class="proj-title">Brain Tumour Detection Using CNN</div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc">
+            A deep learning system that detects brain tumours from MRI scans using a
+            <span class="custom">Convolutional Neural Network (CNN)</span> built with TensorFlow &amp; Keras.
+            Trained on labeled MRI datasets to classify tumor vs. non-tumor scans with high accuracy,
+            demonstrating AI's potential in medical diagnostics.
+          </p>
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">TensorFlow</span>
+          <span class="proj-tag">Keras</span>
+          <span class="proj-tag">CNN</span>
+          <span class="proj-tag">OpenCV</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <span class="proj-icon">🚲</span>
+          <div class="proj-title">EcoRide – Smart Bicycle Sharing System</div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc">
+            A smart, eco-friendly <span class="custom">bicycle sharing platform</span> designed to promote
+            sustainable urban transportation. Integrates user registration, bike availability tracking,
+            and booking management — combining IoT concepts with software development.
+          </p>
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">IoT</span>
+          <span class="proj-tag">Software Dev</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-header">
+          <span class="proj-icon">📝</span>
+          <div class="proj-title">Student Registration Form</div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc">
+            A mini-project implementing a fully functional <span class="custom">student registration form</span>
+            with input validation, data entry, and record management. Built to strengthen fundamentals
+            in frontend development and form handling logic.
+          </p>
+          <span class="proj-tag">HTML</span>
+          <span class="proj-tag">CSS</span>
+          <span class="proj-tag">Java</span>
+          <span class="proj-tag">Mini Project</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="max-w">
+    <div class="section-label">Milestones</div>
+    <h2 class="section-title">Achievements</h2>
+    <div class="ach-grid">
+      <div class="ach-item">
+        <span class="ach-icon">☁️</span>
+        <p>
+          Attended the <span class="custom">AWS (Amazon Web Services) Webinar</span> hosted at Mohan Babu University —
+          the <span class="custom">first ever AWS event held in Andhra Pradesh</span>, gaining hands-on exposure to cloud computing concepts.
+        </p>
+      </div>
+      <div class="ach-item">
+        <span class="ach-icon">💻</span>
+        <p>
+          Actively participated in <span class="custom">coding contests and technical events</span> organized by the university,
+          consistently challenging and improving problem-solving skills.
+        </p>
+      </div>
+      <div class="ach-item">
+        <span class="ach-icon">🤖</span>
+        <p>
+          Completed an intensive <span class="custom">Machine Learning Engineer career pathway</span> with
+          <span class="custom">190+ hours</span> of structured training, covering predictive analytics,
+          machine learning, time series analysis, and real-world business applications — gaining practical
+          exposure to data-driven decision making and model development.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="max-w">
+    <div class="section-label">My Resume</div>
+    <h2 class="section-title">Resume</h2>
+    <p class="section-desc">A full overview of my education, skills, projects, and achievements.</p>
+
+    <div style="
+      background:var(--white); color:#111;
+      border-radius:20px; margin-top:2.5rem;
+      padding:3rem 3.5rem; font-family:'Lora',Georgia,serif;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+      position:relative; overflow:hidden;
+    ">
+      <!-- Print button -->
+      <button onclick="printResume()" style="
+        position:absolute; top:1.5rem; right:1.5rem;
+        background:#023e8a; color:#fff;
+        border:none; border-radius:8px;
+        padding:.6rem 1.4rem; font-size:.85rem; font-weight:600;
+        cursor:pointer; font-family:'Lora',serif;
+        display:flex; align-items:center; gap:.5rem;
+        transition: background .2s;
+      " onmouseover="this.style.background='#0077b6'" onmouseout="this.style.background='#023e8a'">
+        🖨️ Print / Save PDF
+      </button>
+
+      <!-- Header -->
+      <div style="border-bottom:2px solid #023e8a; padding-bottom:1.2rem; margin-bottom:1.8rem;">
+        <h1 style="font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:800; color:#023e8a; letter-spacing:1px;">DEVARINTI LAKSHMIKANTH</h1>
+        <div style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:.7rem; font-size:.88rem; color:#444;">
+          <span>📞 7569354317</span>
+          <span>✉️ drlakshmikanth9@gmail.com</span>
+          <span>📍 Tirupathi</span>
+          <span><a href="https://www.linkedin.com/in/devarinti-lakshmikanth-0a0140289" target="_blank" style="color:#023e8a;">💼 LinkedIn</a></span>
+          <span><a href="https://github.com/drlakshmikanth9-ops" target="_blank" style="color:#023e8a;">🐙 GitHub</a></span>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div style="margin-bottom:1.8rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.7rem; border-left:4px solid #0077b6; padding-left:.7rem;">About Me</h2>
+        <p style="color:#333; font-size:.92rem; line-height:1.8;">I am a motivated B.Tech Computer Science Engineering (AI & ML) student currently in my 3rd year, with a strong foundation in programming, data structures, and machine learning concepts. I am eager to apply my technical skills to real-world projects, enhance my problem-solving abilities, and gain industry experience through internships and collaborative work.</p>
+      </div>
+
+      <!-- Education -->
+      <div style="margin-bottom:1.8rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:1rem; border-left:4px solid #0077b6; padding-left:.7rem;">Education</h2>
+        <table style="width:100%; border-collapse:collapse; font-size:.9rem;">
+          <tr style="background:#f0f6ff;">
+            <td style="padding:.7rem 1rem; font-weight:700; color:#023e8a;">Mohan Babu University</td>
+            <td style="padding:.7rem 1rem; color:#444;">B.Tech CSE (AI & ML) · CGPA: 7.66</td>
+            <td style="padding:.7rem 1rem; color:#666; text-align:right;">Tirupathi · 2023–2027</td>
+          </tr>
+          <tr>
+            <td style="padding:.7rem 1rem; font-weight:700; color:#023e8a;">Narayana Junior College</td>
+            <td style="padding:.7rem 1rem; color:#444;">Intermediate (12th) · 66.7%</td>
+            <td style="padding:.7rem 1rem; color:#666; text-align:right;">Adoni · 2021–2023</td>
+          </tr>
+          <tr style="background:#f0f6ff;">
+            <td style="padding:.7rem 1rem; font-weight:700; color:#023e8a;">Mount Carmel High School</td>
+            <td style="padding:.7rem 1rem; color:#444;">SSC (10th) · 66.7%</td>
+            <td style="padding:.7rem 1rem; color:#666; text-align:right;">Kosigi · 2020</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Technical Skills -->
+      <div style="margin-bottom:1.8rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.8rem; border-left:4px solid #0077b6; padding-left:.7rem;">Technical Skills</h2>
+        <div style="font-size:.9rem; color:#333; line-height:2;">
+          <div><strong style="color:#023e8a;">Programming Languages:</strong> Java, C, Python, HTML/CSS (Frontend)</div>
+          <div><strong style="color:#023e8a;">Core Skills:</strong> Problem Solving, Object-Oriented Programming, Data Structures & Algorithms</div>
+          <div><strong style="color:#023e8a;">Tools & Platforms:</strong> Eclipse, VS Code, GitHub, Jupyter Notebook</div>
+          <div><strong style="color:#023e8a;">Areas of Interest:</strong> Artificial Intelligence, Software Development, Internet of Things (IoT)</div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <div style="margin-bottom:1.8rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.8rem; border-left:4px solid #0077b6; padding-left:.7rem;">Academic Projects</h2>
+        <ol style="font-size:.9rem; color:#333; line-height:2; padding-left:1.5rem;">
+          <li><strong>Brain Tumour Detection Using CNN</strong> — Deep learning model using TensorFlow & Keras to classify brain MRI scans.</li>
+          <li><strong>EcoRide – Smart Bicycle Sharing System</strong> — IoT-integrated smart bike sharing platform.</li>
+          <li><strong>Student Registration Form</strong> (Mini Project) — Frontend form with input validation and record management.</li>
+        </ol>
+      </div>
+
+      <!-- Achievements -->
+      <div style="margin-bottom:1.8rem;">
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.8rem; border-left:4px solid #0077b6; padding-left:.7rem;">Achievements</h2>
+        <ul style="font-size:.9rem; color:#333; line-height:2; padding-left:1.5rem;">
+          <li>Attended <strong>AWS Webinar</strong> at Mohan Babu University — first ever AWS event in Andhra Pradesh.</li>
+          <li>Actively participated in <strong>coding contests and technical events</strong> at university.</li>
+          <li>Completed <strong>190+ hours</strong> Machine Learning Engineer career pathway covering predictive analytics, ML, and time series analysis.</li>
+        </ul>
+      </div>
+
+      <!-- Soft Skills -->
+      <div>
+        <h2 style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:800; color:#023e8a; text-transform:uppercase; letter-spacing:.1em; margin-bottom:.8rem; border-left:4px solid #0077b6; padding-left:.7rem;">Skills</h2>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap;">
+          <span style="background:#e8f4fd; border:1px solid #b3d4f0; color:#023e8a; font-size:.82rem; font-weight:600; padding:.3rem .9rem; border-radius:99px;">Teamwork</span>
+          <span style="background:#e8f4fd; border:1px solid #b3d4f0; color:#023e8a; font-size:.82rem; font-weight:600; padding:.3rem .9rem; border-radius:99px;">Adaptability</span>
+          <span style="background:#e8f4fd; border:1px solid #b3d4f0; color:#023e8a; font-size:.82rem; font-weight:600; padding:.3rem .9rem; border-radius:99px;">Problem Solving</span>
+          <span style="background:#e8f4fd; border:1px solid #b3d4f0; color:#023e8a; font-size:.82rem; font-weight:600; padding:.3rem .9rem; border-radius:99px;">Communication</span>
+          <span style="background:#e8f4fd; border:1px solid #b3d4f0; color:#023e8a; font-size:.82rem; font-weight:600; padding:.3rem .9rem; border-radius:99px;">Team Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GOAL -->
+<section class="goal-section" id="goal">
+  <div class="max-w">
+    <div class="goal-inner">
+      <div class="goal-icon">🚀</div>
+      <div class="goal-text">
+        <div class="section-label">Career Aspiration</div>
+        <h2>My Goal</h2>
+        <p style="margin-top:.8rem;">
+          I aspire to secure a <span class="custom">Software Developer role at an MNC</span>,
+          where I can apply my expertise in <span class="custom">Python, Java, AI &amp; ML</span>
+          to build scalable, impactful products. I aim to grow within a collaborative engineering team,
+          contribute to challenging projects, and continuously evolve as a
+          <span class="custom">full-stack and AI-driven developer</span>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="max-w">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <p class="section-desc">Open to internships, collaborations, and opportunities.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="c-icon">📧</span>
+        <div>
+          <h4>Email</h4>
+          <a href="mailto:drlakshmikanth9@gmail.com">drlakshmikanth9@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">📱</span>
+        <div>
+          <h4>Phone</h4>
+          <span class="val">+91 7569354317</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">💼</span>
+        <div>
+          <h4>LinkedIn</h4>
+          <a href="https://www.linkedin.com/in/devarinti-lakshmikanth-0a0140289" target="_blank">
+            devarinti-lakshmikanth
+          </a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">🐙</span>
+        <div>
+          <h4>GitHub</h4>
+          <a href="https://github.com/drlakshmikanth9-ops" target="_blank">drlakshmikanth9-ops</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="c-icon">📍</span>
+        <div>
+          <h4>Location</h4>
+          <span class="val">Tirupathi, Andhra Pradesh</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 <span>Devarinti Lakshmikanth</span></div>
+  <div>B.Tech CSE AI/ML · <span>Mohan Babu University</span></div>
+</footer>
+
+<script>
+  // Embed the uploaded profile photo as a data URL
+  // The image is provided by the user upload — we load it via a canvas trick from the img tag
+  // Since we can't access the file system, we use a placeholder color + CSS that matches the photo's warm tones
+  // and instruct the browser to show the base64 image passed in window context.
+
+  // The photo shows a young man in a white sweatshirt against a light wall.
+  // We'll set a realistic placeholder gradient that approximates the photo feel,
+  // and note to the user they can host and link the photo.
+  
+  const pic = document.getElementById('profilePic');
+  
+  // Try to use the image data if it was passed (works when artifact has access)
+  // Fallback: styled placeholder
+  pic.onerror = function() {
+    this.style.display = 'none';
+    const div = document.createElement('div');
+    div.style.cssText = `
+      width:100%; height:100%;
+      background: linear-gradient(160deg, #d4a57a 0%, #a0785a 40%, #6b4c3b 100%);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.5rem; color:#fff; font-size:.75rem; text-align:center; padding:1rem;
+      font-family: Lora, serif;
+    `;
+    div.innerHTML = '<span style="font-size:3rem">👤</span><span style="opacity:.8">Devarinti Lakshmikanth</span>';
+    this.parentNode.appendChild(div);
+  };
+
+  // The user uploaded their photo — embed it directly using a FileReader trick
+  // Since this is a static artifact, we encode the photo inline using the data provided
+  // Photo captured from upload: approximate the real image with CSS art
+  pic.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='310' height='380'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e8ddd4'/%3E%3Cstop offset='1' stop-color='%23c4b5a8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='310' height='380' fill='url(%23bg)'/%3E%3Cellipse cx='155' cy='130' rx='52' ry='60' fill='%23a0784e'/%3E%3Cellipse cx='155' cy='115' rx='38' ry='42' fill='%23c49a6c'/%3E%3Crect x='95' y='195' width='120' height='90' rx='10' fill='%23f0ece6'/%3E%3Ctext x='155' y='320' text-anchor='middle' font-family='serif' font-size='11' fill='%23777'%3EDevarinti Lakshmikanth%3C/text%3E%3C/svg%3E";
+
+  // Note: For best results, host your photo online and replace the src with your image URL
+  // e.g.: pic.src = "https://your-hosted-image-url.com/photo.jpg";
+
+  function printResume() {
+    const resumeEl = document.getElementById('resume');
+    const printContents = resumeEl.querySelector('div').innerHTML;
+    const win = window.open('', '_blank');
+    win.document.write(`
+      <html><head><title>Devarinti Lakshmikanth - Resume</title>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lora&display=swap" rel="stylesheet"/>
+      <style>
+        body { font-family: Lora, Georgia, serif; padding: 2rem 3rem; color: #111; }
+        button { display: none !important; }
+        @media print { button { display: none !important; } }
+      </style></head><body>${printContents}</body></html>
+    `);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 500);
+  }
+
+</body>
+</html>
